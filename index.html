@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study PDFs</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #4e73df, #1cc88a);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        background: white;
+        width: 90%;
+        max-width: 900px;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    .pdf-list {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+
+    .pdf-btn {
+        padding: 12px 20px;
+        border-radius: 20px;
+        background: #e3f2fd;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        color: #000;
+        font-weight: 600;
+    }
+
+    .pdf-btn:hover {
+        background: #90caf9;
+        transform: scale(1.05);
+    }
+
+    input {
+        padding: 12px;
+        width: 80%;
+        max-width: 300px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    button.unlock {
+        margin-top: 10px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 20px;
+        background: #4e73df;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .error {
+        color: red;
+        margin-top: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- LOCK -->
+    <div id="lock">
+        <h1>🔒 Enter Password</h1>
+        <input type="password" id="password" placeholder="Enter password">
+        <br>
+        <button class="unlock" onclick="checkPass()">Unlock</button>
+        <div class="error" id="error"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div id="content" style="display:none;">
+        <h1>Choose Your Study Material</h1>
+
+        <div class="pdf-list">
+            <a class="pdf-btn" href="chemichal bonding.pdf" target="_blank">
+                📘 Chemical Bonding
+            </a>
+
+            <a class="pdf-btn" href="equIlibrium.pdf" target="_blank">
+                📗 Equilibrium
+            </a>
+
+            <a class="pdf-btn" href="organic.pdf" target="_blank">
+                📕 Organic
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Audio File -->
+<audio id="unlockSound">
+    <source src="dry-fart.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    const correctPassword = "0987";
+
+    function checkPass() {
+        const userPass = document.getElementById("password").value;
+        document.getElementById("error").innerText = "";
+
+        if (userPass === correctPassword) {
+            document.getElementById("lock").style.display = "none";
+            document.getElementById("content").style.display = "block";
+
+            // Play sound
+            document.getElementById("unlockSound").play();
+        } else {
+            document.getElementById("error").innerText = "❌ Wrong password";
+        }
+    }
+
+    // Enter key support
+    document.getElementById("password").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            checkPass();
+        }
+    });
+</script>
+
+</body>
+</html>
